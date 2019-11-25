@@ -1,11 +1,9 @@
 # ok-bysykkel
 
-Simple Flask/Vue based application listing all public bikeshare stations provided by [Oslo Bysykkel](https://oslobysykkel.no/). Automatically updates station status every 15 seconds.
-
-Most obvious improvement potential: Sortable list (including by distance), refresh by returned ttl value and support for older browsers.
+Simple Flask/Vue based application listing and displaying all public bikeshare stations in a map. Data provided by [Oslo Bysykkel](https://oslobysykkel.no/). Automatically updates station status every 15 seconds.
 
 
-### Requirements
+### Requirements (server)
 * [Python 3](https://www.python.org/downloads/)
 	* [Flask](https://pypi.org/project/flask/)
 	* [Requests](https://pypi.org/project/requests/)
