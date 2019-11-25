@@ -42,12 +42,9 @@ var citybike = (function () {
 	var stationMarker = {
 	    extends: Vue2Leaflet.LMarker,
 	    props: ['station', 'status'],
-	    data() {
-	        return {
-	            iconObject: null,
-	        }
+	    computed: {
+	    	iconObject() { return this.mapObject._icon; }
 	    },
-	    computed: {  },
 	    watch: {
 	        status: function(current, previous) {
 	            if (!current) {
@@ -90,17 +87,6 @@ var citybike = (function () {
 	            L.DomUtil.removeClass(this.iconObject, 'orange');
 	            L.DomUtil.removeClass(this.iconObject, 'animate');
 	        }
-	    },
-	    created() {
-	        // Set marker icon
-	        this.icon = L.divIcon({
-	            iconSize: [10, 10],
-	            className: 'bike-station-icon',
-	        });
-	    },
-	    mounted() {
-	        // Set icon object
-	        this.iconObject = this.mapObject._icon;
 	    }
 	};
 
@@ -137,6 +123,8 @@ var citybike = (function () {
 
 	          <l-feature-group ref="stationsGroup">
 	           <l-station-marker v-for="station in stations" v-if="station.lat && station.lon"
+	            :key="station.station_id"
+	            :icon="markerIcon"
 	            :lat-lng="{lat: station.lat, lon: station.lon}"
 	            :station="station"
 	            :status="station.status">
@@ -159,6 +147,10 @@ var citybike = (function () {
 	            zoom: 13,
 	            center: [59.911126, 10.752529],
 	            bounds: [],
+	            markerIcon: L.divIcon({
+	            	iconSize: [10, 10],
+	            	className: 'bike-station-icon',
+	        	})
 	        };
 	    },
 	    watch: {
