@@ -16,7 +16,7 @@ body {
 /* Header */
 header {
 	display: grid;
-	grid-template-columns: 55px 1fr 180px;
+	grid-template-columns: 50px 1fr 180px;
 	padding: 0 15px;
 	background: #1c487b;
 	font-size: 2em;
@@ -76,7 +76,8 @@ div#map,
 }
 .bike-station-icon.animate { z-index: 999; }
 .bike-station-icon.animate:after {
-    content: ''; position: absolute;
+    content: ''; 
+    position: absolute;
     border-radius: 100%;
     height: 300%; width: 300%;
     margin: -100% 0 0 -100%;
@@ -185,7 +186,7 @@ div#error {
 
 /* Media queries */
 @media only screen and (max-width: 425px) {
-	header { grid-template-columns: 55px 1fr; }
+	header { grid-template-columns: 50px 1fr; }
 	header .stats { display: none; }
 }
 @media only screen and (max-width: 700px) {
