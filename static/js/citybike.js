@@ -17,7 +17,33 @@ Vue.component('stations-list', citybike.stationsList);
 // ====== App ==================================================================
 
 var app = new Vue({
-    delimiters: ['[[', ']]'],
+    template: `
+        <div id="wrapper">
+         <header>
+          <img src="static/images/icon.png" alt="icon">
+          <span class="name">Bysykkel (Oslo)</span>
+          <div class="stats">
+           Stativer: {{stations.length}}<br>
+           Oppdatert: {{lastStatusUpdate}}
+          </div>
+         </header>
+
+         <section id="container">
+          <stations-map 
+            :stations="stations"
+            :focused-station="focusedStationId" />
+
+          <stations-list 
+            :stations="stations"
+            :focused-station="focusedStationId"
+            @station-clicked="stationFocused" />
+         </section>
+
+         <div id="error" v-if="errorMessage">
+          <b>Feilmelding</b>: {{errorMessage}}.
+         </div>
+        </div>
+    `,
     data: {
         stations: [],
         focusedStationId: null,
