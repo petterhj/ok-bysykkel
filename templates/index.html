@@ -1,0 +1,58 @@
+<!doctype html>
+
+<html lang="no">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#013B91">
+
+  <link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}">
+
+  <link type="text/css" href="{{url_for('static', filename='css/leaflet.css')}}" rel="stylesheet">
+  <link type="text/css" href="{{url_for('static', filename='css/fontello.css')}}" rel="stylesheet">
+  <link type="text/css" href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+
+  <script type="text/javascript" src="{{url_for('static', filename='js/vue.min.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='js/vue-resource.min.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='js/leaflet.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='js/vue-leaflet.min.js')}}"></script>
+
+  <title>Bysykkel</title>
+ </head>
+
+ <body>
+  <div id="app">
+   <!-- Header -->
+   <header>
+    <img src="{{url_for('static', filename='images/icon.png')}}" alt="icon">
+    <span class="name">Bysykkel (Oslo)</span>
+    <div class="stats">
+     Stativer: [[stations.length]]<br>
+     Oppdatert: [[lastStatusUpdate]]
+    </div>
+   </header>
+
+   <!-- Container -->
+   <section id="container">
+    <!-- Map -->
+    <stations-map 
+      :stations="stations"
+      :focused-station="focusedStationId">
+    </stations-map>
+ 
+    <!-- List -->
+    <stations-list 
+      :stations="stations"
+      :focused-station="focusedStationId"
+      @station-clicked="stationFocused">
+    </stations-list>
+   </section>
+
+   <div id="error" v-if="errorMessage">
+    <b>Feilmelding</b>: [[errorMessage]].
+   </div>
+  </div>
+
+  <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+ </body>
+</html>

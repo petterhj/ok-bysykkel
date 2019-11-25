@@ -1,0 +1,184 @@
+html, body, #app { height: 100%; }
+body { 
+	margin: 0; 
+	background-color: #0A61BE; 
+	font-size: 62.5%;
+	font-family: sans-serif;
+}
+#app { position: relative; }
+
+
+header {
+	display: grid;
+	grid-template-columns: 55px 1fr 160px;
+	padding: 0 15px;
+	background: #1c487b;
+	font-size: 2em;
+	line-height: 46px;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+	color: #FFF;
+}
+header .stats { 
+	font-size: 0.5em; line-height: 1.5em; 
+	color: rgba(255, 255, 255, 0.3);
+	margin-top: 8px; text-align: right;
+}
+
+
+section#container { height: calc(100% - 48px); }
+
+
+div#map, .leaflet-container { height: 100%; width: 100%; }
+
+@keyframes pulsate {
+	/* 	Adapted from leaflet-icon-pulse, 
+	https://github.com/mapshakers/leaflet-icon-pulse */
+    0% {
+        transform: scale(0.1, 0.1);
+        opacity: 0;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        filter: alpha(opacity=0);
+    }
+    50% {
+        opacity: 1;
+        -ms-filter: none;
+        filter: none;
+    }
+    100% {
+        transform: scale(1.2, 1.2);
+        opacity: 0;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        filter: alpha(opacity=0);
+    }
+}
+.bike-station-icon { 
+	border-radius: 100%;
+	background: #9E9E9E;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.bike-station-icon.red { background: #F44336; }
+.bike-station-icon.green { background: #4CAF50; }
+.bike-station-icon.orange { background: #FF9800; }
+
+.bike-station-icon.animate { z-index: 999; }
+.bike-station-icon.animate:after {
+    content: ''; position: absolute;
+    border-radius: 100%;
+    height: 300%; width: 300%;
+    margin: -100% 0 0 -100%;
+    opacity: 0;
+	animation: pulsate 1s ease-out;
+    animation-iteration-count: 5;
+    animation-delay: 0;
+}
+.bike-station-icon.red.animate:after { box-shadow: 0 0 6px 1px #F44336; }
+.bike-station-icon.green.animate:after { box-shadow: 0 0 3px 1px #4CAF50; }
+.bike-station-icon.orange.animate:after { box-shadow: 0 0 3px 1px #FF9800; }
+
+
+.station-popup {}
+.station-popup h1 { margin: 0; font-size: 1.2em; }
+.station-popup h2 { margin: 0; font-size: 1em; color: #666; }
+.station-popup div { margin-top: 5px; }
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+.leaflet-popup-content-wrapper { border-radius: 4px; }
+
+
+
+div#stations {
+	position: absolute; z-index: 999;
+	top: 58px; left: 10px;
+	height: calc(100% - 68px); width: 350px; 
+	background: rgba(255, 255, 255, 0.95);
+	border-radius: 4px;
+	overflow-y: scroll; overflow-x: hidden;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+.station { 
+	padding: 8px 12px;
+	display: grid; 
+	grid-template-columns: 2fr 1fr; 
+}
+.station:hover,
+.station.active { 
+	background: #2f83ff2b; 
+	cursor: pointer;
+}
+.station h1 { margin: 0 0 3px 0; font-size: 1.2em; }
+.station h2 { 
+	margin: 0; font-weight: normal;
+	font-size: 1em; color: #666; 
+}
+
+
+
+.station-status-badge { 
+	display: grid;
+	grid-template-columns: repeat(2, 50%);
+	font-size: 1.3em;
+	font-weight: bold;
+	border-radius: 4px;
+}
+.station-status-badge > div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 4px 8px;
+	background: #EFEFEF;
+	color: rgba(0, 0, 0, 0.8);
+}
+.station-status-badge > div.red { background: #ef9a9a; }
+.station-status-badge > div.green { background: #81c784; }
+.station-status-badge > div.orange { background: #ffcc80;  }
+.station-status-badge > div:not(:last-of-type) {
+	border-right: 1px solid rgba(0, 0, 0, 0.05);
+	border-top-left-radius: inherit;
+	border-bottom-left-radius: inherit;
+}
+.station-status-badge > div:not(:first-of-type) {
+	border-left: 1px solid rgba(255, 255, 255, 0.1);
+	border-top-right-radius: inherit;
+	border-bottom-right-radius: inherit;
+}
+.station-status-badge > div > i.icon { 
+	margin-right: 4px; 
+	color: rgba(0, 0, 0, 0.3);
+}
+.station-status-badge > div > span { 
+	display: inline-block;
+	width: 20px;
+	text-align: center;
+}
+
+
+div#error { 
+	background: #ef5350; 
+	position: fixed; bottom: 0;
+	width: 100%; z-index: 9999;
+	padding: 15px 20px;
+	font-size: 1.5rem;
+}
+
+
+@media only screen and (max-width: 400px) {
+	header { grid-template-columns: 55px 1fr; }
+	header .stats { display: none; }
+}
+@media only screen and (max-width: 700px) {
+	section#container {
+		display: grid;
+		grid-template-rows: 3fr 5fr;
+	}
+
+	div#stations {
+		position: relative; 
+		top: auto; left: auto;
+		width: 100%; height: auto;
+		overflow-y: scroll; overflow-x: auto;
+		border-top: 2px solid #CCC;
+		background: #FFF; border-radius: 0;
+	}
+}
