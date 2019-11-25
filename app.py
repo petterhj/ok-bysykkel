@@ -16,7 +16,7 @@ GBFS_BASE_URL = 'https://gbfs.urbansharing.com/oslobysykkel.no/%s'
 # App instance
 app = Flask(__name__, **{
     'template_folder': 'templates',
-    'static_folder': 'assets',
+    'static_folder': 'static',
 })
 
 @app.errorhandler(Exception)
