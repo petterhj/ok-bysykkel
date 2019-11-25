@@ -1,4 +1,5 @@
-// Component: Bike station status badge
+// Component: Bike station status badge (shared between 
+// stations list and marker popup)
 Vue.component('station-badge', {
     template: `
         <div class="station-status-badge">
@@ -203,11 +204,8 @@ Vue.component('stations-map', {
                 '<a href="https://urbansharing.com/">Urban Sharing</a>'
             ].join(' | '));
         }
-    },
-    mounted() {       
     }
 });
-
 
 
 
@@ -258,8 +256,8 @@ var app = new Vue({
         }
     },
     methods: {
+        // Fetch list of publicly available stations
         getStationInformation() {
-            // Fetch list of publicly available stations
             console.log('Fetching stations list');
 
             this.$http.get('/json/stations').then(response => {
@@ -287,11 +285,11 @@ var app = new Vue({
             });
         },
 
+        // Update status information for all stations
         updateStationStatus() {
             if (!this.stations)
                 return;
 
-            // Fetch status update for all stations
             console.log('Fetching status for all stations');
 
             this.$http.get('/json/stations/status').then(response => {
@@ -338,6 +336,5 @@ var app = new Vue({
     },
     mounted() {
         this.getStationInformation();
-        console.log(this.$refs)
     },
 }).$mount('#app');
