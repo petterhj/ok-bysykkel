@@ -16,7 +16,7 @@ body {
 /* Header */
 header {
 	display: grid;
-	grid-template-columns: 55px 1fr 160px;
+	grid-template-columns: 55px 1fr 180px;
 	padding: 0 15px;
 	background: #1c487b;
 	font-size: 2em;
@@ -184,7 +184,7 @@ div#error {
 
 
 /* Media queries */
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 425px) {
 	header { grid-template-columns: 55px 1fr; }
 	header .stats { display: none; }
 }
