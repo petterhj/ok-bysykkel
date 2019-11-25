@@ -20,7 +20,7 @@ var app = new Vue({
     template: `
         <div id="wrapper">
          <header>
-          <img src="static/images/icon.png" alt="icon">
+          <i class="icon icon-bicycle"></i>
           <span class="name">Bysykkel (Oslo)</span>
           <div class="stats">
            Stativer: {{stations.length}}<br>
@@ -127,6 +127,8 @@ var app = new Vue({
         },
 
         setErrorState(message) {
+            console.log('Setting error state with message "'+message+'"');
+
             // Set (and display) error message
             this.errorMessage = message;
 
