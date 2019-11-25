@@ -194,7 +194,8 @@ var citybike = (function () {
 	var stationsList = {
 	    template: `
 	        <div id="stations">
-	         <div class="station" v-for="station in stations" :key="station.station_id"
+	         <div class="station" v-for="station in stations" 
+	            :key="station.station_id"
 	            :class="{ active: (focusedStation == station.station_id) }" 
 	            @click="$emit('station-clicked', station.station_id)">
 	          <div class="details">
