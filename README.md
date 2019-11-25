@@ -20,4 +20,4 @@ Binds to localhost:5000 (with debug enabled) by default.
 
 
 ### Screenshot
-![ok-bysykkel](https://raw.githubusercontent.com/petterhj/ok-bysykkel/master/screenshot.png "ok-bysykkel")
+![ok-bysykkel](https://raw.githubusercontent.com/petterhj/ok-bysykkel/master/screenshot2.png "ok-bysykkel")
