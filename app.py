@@ -15,7 +15,7 @@ GBFS_BASE_URL = 'https://gbfs.urbansharing.com/oslobysykkel.no/%s'
 
 # App instance
 app = Flask(__name__, **{
-    'template_folder': 'assets',
+    'template_folder': 'templates',
     'static_folder': 'assets',
 })
 
@@ -61,6 +61,7 @@ def station_information():
     r.raise_for_status()
 
     stations = r.json()
+    stations['data']['stations'] = sorted(stations['data']['stations'], key=lambda s: s['name'])
     stations['success'] = True
 
     return stations
@@ -70,8 +71,8 @@ def station_information():
 @app.route('/json/stations/status')
 def station_status():
     '''
-    Returns station status as dict with station ID as key. Exceptions
-    handled by flask error handler.
+    Returns station status as dict with station ID as key. 
+    Exceptions handled by flask error handler.
     '''
 
     logger.info('Requesting station status')
