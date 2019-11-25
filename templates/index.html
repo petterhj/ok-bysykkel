@@ -53,6 +53,10 @@
    </div>
   </div>
 
-  <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='js/citybike.components.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='js/citybike.js')}}"></script>
+  <script type="text/javascript">
+    app.$mount('#app');
+  </script>
  </body>
 </html>
